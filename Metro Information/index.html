@@ -1,0 +1,1405 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namma Metro</title>
+    <meta name="description" content="Discover Namma Metro: routes, stations, and travel tips for Bengaluru's modern rapid transit network.">
+    <link rel="icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background: #f7f9fc;
+            color: #202940;
+        }
+        .hero {
+            min-height: 80vh;
+            background: linear-gradient(135deg, rgba(19, 78, 206, 0.85), rgba(31, 171, 225, 0.85)), url('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+            color: white;
+        }
+        .hero-overlay {
+            backdrop-filter: blur(3px);
+            background: rgba(0, 0, 0, 0.35);
+        }
+        .footer {
+            background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+            color: white;
+        }
+        .footer h3,
+        .footer h4,
+        .footer strong {
+            color: white;
+            font-weight: 600;
+        }
+        .footer p,
+        .footer small {
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+        }
+        .seat-legend {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .seat-available {
+            background-color: #28A745;
+            border: 2px solid #1e7e34;
+        }
+        .seat-premium {
+            background-color: #FFD700;
+            border: 2px solid #DAA520;
+        }
+        .seat-selected {
+            background-color: #0d6efd;
+            border: 2px solid #0b5ed7;
+        }
+        .seat-booked {
+            background-color: #dc3545;
+            border: 2px solid #bb2d3b;
+        }
+        .seat {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            background-color: #28A745;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .seat:hover:not(.seat.booked) {
+            transform: scale(1.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+        }
+        .seat.premium {
+            background-color: #FFD700;
+            color: #333;
+        }
+        .seat.selected {
+            background-color: #0d6efd;
+            border-color: #0b5ed7;
+            box-shadow: 0 0 8px rgba(13, 110, 253, 0.5);
+        }
+        .seat.booked {
+            background-color: #dc3545;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        #backToTop {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body class="bg-light text-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Namma Metro</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#status">Status</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#map">Map</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#lines">Lines</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#stations-guide">Stations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#planner">Planner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero text-white d-flex align-items-center" style="min-height: 80vh; background: linear-gradient(135deg, rgba(19, 78, 206, 0.85), rgba(31, 171, 225, 0.85)), url('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;">
+        <div class="container py-5 hero-overlay rounded-4 shadow-lg" style="backdrop-filter: blur(3px); background: rgba(0, 0, 0, 0.35);">
+            <div class="row align-items-center">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <h1 class="display-5 fw-bold">Ride Bengaluru's fast, safe, and modern metro network.</h1>
+                    <p class="lead mb-4">Explore Namma Metro lines, discover station highlights, and plan your next journey with ease.</p>
+                    <div class="d-grid d-sm-flex gap-2 justify-content-center justify-content-lg-start">
+                        <a href="#lines" class="btn btn-primary btn-lg px-4">View Metro Lines</a>
+                        <a href="#contact" class="btn btn-outline-light btn-lg px-4">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 mt-4 mt-lg-0">
+                    <div class="card border-0 shadow-lg overflow-hidden">
+                        <div class="ratio ratio-4x3">
+                            <img src="https://imgs.search.brave.com/TU8VUiTjqQib9g_laPaxfU1AmiSJ10AaGAXyQY3nxE4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI5/ODkzNTE4L3Bob3Rv/L2JhbmdhbG9yZS1p/bmRpYS10aGUtbmV3/bHktaW5hdWdyYXRl/ZC1iYW5nYWxvcmUt/bWV0cm8tYWxzby1r/bm93bi1hcy1uYW1t/YS1tZXRyby1vci1v/dXItbWV0cm8uanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPW9y/YlotX3FOdXZuZ3du/Q1Frd29sTks4RlZn/eUhpdzVhZFRkQkE1/WC03MWM9" class="img-fluid rounded-4" alt="Namma Metro train at station">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container py-5">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="p-4 rounded-4 bg-white shadow-sm h-100">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary mb-3" style="width: 56px; height: 56px;">🚄</div>
+                    <h5>Efficient Travel</h5>
+                    <p class="mb-0">Skip traffic jams with fast metro connections across Bengaluru.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 rounded-4 bg-white shadow-sm h-100">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary mb-3" style="width: 56px; height: 56px;">🛡️</div>
+                    <h5>Safe & Secure</h5>
+                    <p class="mb-0">Travel confidently with modern stations and well-monitored trains.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 rounded-4 bg-white shadow-sm h-100">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary-subtle text-primary mb-3" style="width: 56px; height: 56px;">📍</div>
+                    <h5>City Coverage</h5>
+                    <p class="mb-0">Connect major hubs and landmarks across the city with ease.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="container py-5">
+        <div class="d-flex align-items-center mb-4">
+            <span class="badge bg-success me-3">Gallery</span>
+            <h2 class="mb-0">Explore Namma Metro</h2>
+        </div>
+        <p class="text-muted mb-5">Take a visual journey through Bengaluru's modern metro system.</p>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="https://imgs.search.brave.com/yGGCw0fLmgwpwC6oY6wv2Tvv8DvfE9VUYEHjHyGHKmw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNDc1/MDMxODQ0L3Bob3Rv/L3Bhc3NlbmdlcnMt/d2FpdC10by1ib2Fy/ZC1hLXRyYWluLWF0/LW1hbnRyaS1zYW1w/aWdlLXNxdWFyZS1t/ZXRyby1zdGF0aW9u/LW9wZXJhdGVkLWJ5/LWJhbmdhbG9yZS5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/Zm03UGtXVXVfLTZE/U2JiWWpmaktqdXUx/RzA2OGhIOVE4WnVB/Qjltb3Z1RT0" class="card-img-top" alt="Metro Station">
+                    <div class="card-body">
+                        <h6 class="card-title">Modern Stations</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="https://imgs.search.brave.com/8Bj3xWUTye_ZjnLVs4QVrXgErn6ZspgFqmhOw8uJHoM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9sYWxi/YWdoZ2FyZGVuLmlu/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDI2/LzAzL2ltYWdlLTY1/LnBuZw" class="card-img-top" alt="Metro Train">
+                    <div class="card-body">
+                        <h6 class="card-title">Comfortable Travel</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="https://imgs.search.brave.com/vMEiXQlzo6vnP--xdjSXraSN7d9owyK89xsnQ4DH4w8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ob21l/YmF6YWFyLWJsb2cu/czMuYXAtc291dGgt/MS5hbWF6b25hd3Mu/Y29tL2tub3dsZWRn/ZS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/My8xMi8xOTEyMTEw/Mi9QaGFzZS0xLW1p/bi0yLmpwZw" class="card-img-top" alt="Metro Platform">
+                    <div class="card-body">
+                        <h6 class="card-title">Efficient Platforms</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-to-ride" class="container py-5">
+        <div class="d-flex align-items-center mb-4">
+            <span class="badge bg-secondary me-3">How It Works</span>
+            <h2 class="mb-0">How to Ride Namma Metro</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 display-6">1</div>
+                        <h5 class="card-title">Choose Your Route</h5>
+                        <p class="card-text">Pick your start and end stations, then check live line status before you travel.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 display-6">2</div>
+                        <h5 class="card-title">Buy Tickets</h5>
+                        <p class="card-text">Buy a ticket at the counter, use the app, or tap your smart card at the entry gate.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="mb-3 display-6">3</div>
+                        <h5 class="card-title">Ride with Confidence</h5>
+                        <p class="card-text">Enjoy clean stations, safe boarding, and fast travel across Bengaluru.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lines" class="bg-light py-5">
+        <div class="container">
+            <div class="d-flex align-items-center mb-4">
+                <span class="badge bg-primary me-3">Metro Lines</span>
+                <h2 class="mb-0">Explore the main corridors of Namma Metro</h2>
+            </div>
+            <p class="text-muted mb-5">Namma Metro helps Bengaluru commuters move faster with four operational lines and expanding corridors.</p>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+                <div class="col">
+                    <div class="card line-card shadow-sm h-100">
+                        <img src="https://imgs.search.brave.com/hh1VnDoY_vtSSJMkut-8u3tdW8aG1wV0rfVY5CY73AQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/aGV4YWhvbWUuaW4v/bWVkaWEvYmxvZ3Mv/aGV4YWhvbWUtYmxv/Z3MveWVsbG93LWxp/bmUtYmFuZ2xvcmUv/aGVyby1zZWN0aW9u/LndlYnA"
+                            class="card-img-top" alt="Yellow Line" style="height: 220px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Yellow Line</h5>
+                            <p class="card-text">Connects R.V. Road to Bommasandra, serving Electronic City and key IT hubs.</p>
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <span class="badge bg-warning text-dark">Electronic City</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card line-card shadow-sm h-100">
+                        <img src="https://imgs.search.brave.com/Xp0yrbYU0dJwy_Af92-b5H34tqnUL7J0VVaV1P9BRlg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/ZmFiaG90ZWxzLmNv/bS9ibG9nL3dwLWNv/bnRlbnQvdXBsb2Fk/cy8yMDE5LzEwL0dy/ZWVuLWxpbmVfNjAw/LmpwZzpjZi13ZWJw/OnctNDUwOmgtMjQw"
+                            class="card-img-top" alt="Green Line" style="height: 220px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Green Line</h5>
+                            <p class="card-text">Runs from Madavara (BIEC) to Silk Institute, linking north-west and south Bengaluru.</p>
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <span class="badge bg-success">North-South Corridor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card line-card shadow-sm h-100">
+                        <img src="https://imgs.search.brave.com/pibrkPfnaMYEE0_A41TBtWFWrlfG4SyYTkqIXkUKpxU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/aGV4YWhvbWUuaW4v/bWVkaWEvYmxvZ3Mv/aGV4YWhvbWUtYmxv/Z3MvcHVycGxlLWxp/bmUtbWV0cm8tYmFu/Z2Fsb3JlLXJvdXRl/LXN0YXRpb25zLWFu/ZC10aW1pbmdzL2hl/cm8tc2VjdGlvbi1z/c2g3MndhLndlYnA"
+                            class="card-img-top" alt="Purple Line" style="height: 220px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Purple Line</h5>
+                            <p class="card-text">Busiest east-west route from Whitefield (Kadugodi) to Challaghatta.</p>
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <span class="badge bg-secondary">East-West Corridor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card line-card shadow-sm h-100">
+                        <img src="https://imgs.search.brave.com/kJHBLNWQ_YBoby95Pa4Ss2Eyv-_rlP6rP7rRahNPcxE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/aGV4YWhvbWUuaW4v/bWVkaWEvYmxvZ3Mv/aGV4YWhvbWUtYmxv/Z3MvbmFtbWEtbWV0/cm8tcGluay1saW5l/LWJhbmdhbG9yZS9o/ZXJvLXNlY3Rpb24u/d2VicA"
+                            class="card-img-top" alt="Pink Line" style="height: 220px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Pink Line</h5>
+                            <p class="card-text">A mixed underground and elevated corridor from Bannerghatta Road to Nagawara.</p>
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <span class="badge" style="background:#d63384; color:white;">Underground / Elevated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="status" class="bg-light py-5">
+        <div class="container">
+            <div class="d-flex align-items-center mb-4">
+                <span class="badge bg-info me-3">Live Status</span>
+                <h2 class="mb-0">Metro Line Status</h2>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="card-title mb-0">Yellow Line</h6>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle me-1"></i>Normal
+                                </span>
+                            </div>
+                            <small class="text-muted">R.V. Road to Bommasandra</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="card-title mb-0">Green Line</h6>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle me-1"></i>Normal
+                                </span>
+                            </div>
+                            <small class="text-muted">Madavara to Silk Institute</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="card-title mb-0">Purple Line</h6>
+                                <span class="badge bg-warning">
+                                    <i class="fas fa-exclamation-circle me-1"></i>Minor Delays
+                                </span>
+                            </div>
+                            <small class="text-muted">Kadugodi to Challaghatta</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="card-title mb-0">Pink Line</h6>
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle me-1"></i>Normal
+                                </span>
+                            </div>
+                            <small class="text-muted">Bannerghatta Road to Nagawara</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="map" class="container py-5">
+        <div class="row mb-4">
+            <div class="col">
+                <h2>Interactive Metro Map</h2>
+                <p class="text-muted">Explore Namma Metro lines and station locations across Bengaluru</p>
+            </div>
+        </div>
+        <div class="card shadow-sm border-0 overflow-hidden">
+            <div class="card-body p-0">
+                <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #f8f9fa;">
+                    <!-- Yellow Line -->
+                    <line x1="100" y1="700" x2="900" y2="200" stroke="#FFC107" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="100" cy="700" r="12" fill="#FFC107" class="station-dot" data-station="R.V. Road"/>
+                    <text x="100" y="725" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">R.V. Road</text>
+                    
+                    <circle cx="300" cy="550" r="12" fill="#FFC107" class="station-dot" data-station="Jayanagar"/>
+                    <text x="300" y="575" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Jayanagar</text>
+                    
+                    <circle cx="550" cy="350" r="12" fill="#FFC107" class="station-dot" data-station="Koramangala"/>
+                    <text x="550" y="375" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Koramangala</text>
+                    
+                    <circle cx="900" cy="200" r="12" fill="#FFC107" class="station-dot" data-station="Bommasandra"/>
+                    <text x="900" y="225" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Bommasandra</text>
+                    
+                    <!-- Green Line -->
+                    <line x1="150" y1="100" x2="800" y2="750" stroke="#28A745" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="150" cy="100" r="12" fill="#28A745" class="station-dot" data-station="Madavara"/>
+                    <text x="150" y="75" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Madavara</text>
+                    
+                    <circle cx="350" cy="300" r="12" fill="#28A745" class="station-dot" data-station="Yelahanka"/>
+                    <text x="350" y="325" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Yelahanka</text>
+                    
+                    <circle cx="550" cy="500" r="12" fill="#28A745" class="station-dot" data-station="Indiranagar"/>
+                    <text x="550" y="530" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Indiranagar</text>
+                    
+                    <circle cx="800" cy="750" r="12" fill="#28A745" class="station-dot" data-station="Silk Institute"/>
+                    <text x="800" y="775" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Silk Institute</text>
+                    
+                    <!-- Purple Line -->
+                    <line x1="100" y1="300" x2="900" y2="400" stroke="#6F42C1" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="100" cy="300" r="12" fill="#6F42C1" class="station-dot" data-station="Kadugodi"/>
+                    <text x="60" y="305" text-anchor="end" font-size="11" font-weight="bold" fill="#333">Kadugodi</text>
+                    
+                    <circle cx="400" cy="350" r="12" fill="#6F42C1" class="station-dot" data-station="Whitefield"/>
+                    <text x="400" y="375" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Whitefield</text>
+                    
+                    <circle cx="700" cy="380" r="12" fill="#6F42C1" class="station-dot" data-station="Marathahalli"/>
+                    <text x="700" y="405" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Marathahalli</text>
+                    
+                    <circle cx="900" cy="400" r="12" fill="#6F42C1" class="station-dot" data-station="Challaghatta"/>
+                    <text x="950" y="405" text-anchor="start" font-size="11" font-weight="bold" fill="#333">Challaghatta</text>
+                    
+                    <!-- Pink Line -->
+                    <line x1="200" y1="200" x2="200" y2="700" stroke="#E83E8C" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="200" cy="200" r="12" fill="#E83E8C" class="station-dot" data-station="Nagawara"/>
+                    <text x="160" y="205" text-anchor="end" font-size="11" font-weight="bold" fill="#333">Nagawara</text>
+                    
+                    <circle cx="200" cy="400" r="12" fill="#E83E8C" class="station-dot" data-station="MG Road"/>
+                    <text x="160" y="405" text-anchor="end" font-size="11" font-weight="bold" fill="#333">MG Road</text>
+                    
+                    <circle cx="200" cy="600" r="12" fill="#E83E8C" class="station-dot" data-station="Bannerghatta Rd"/>
+                    <text x="160" y="605" text-anchor="end" font-size="11" font-weight="bold" fill="#333">Bannerghatta</text>
+                    <circle cx="200" cy="700" r="12" fill="#E83E8C" class="station-dot" data-station="Southern End"/>
+                </svg>
+            </div>
+            <div class="card-footer bg-white border-top">
+                <small class="text-muted">
+                    <span class="me-3"><i class="fas fa-circle" style="color: #FFC107;"></i> Yellow Line</span>
+                    <span class="me-3"><i class="fas fa-circle" style="color: #28A745;"></i> Green Line</span>
+                    <span class="me-3"><i class="fas fa-circle" style="color: #6F42C1;"></i> Purple Line</span>
+                    <span class="me-3"><i class="fas fa-circle" style="color: #E83E8C;"></i> Pink Line</span>
+                </small>
+            </div>
+        </div>
+    </section>
+
+    <section id="planner" class="container py-5">
+        <div class="row align-items-center mb-4">
+            <div class="col-md-7">
+                <h2>Route Planner</h2>
+                <p class="text-muted">Find the best route between stations with real-time updates.</p>
+            </div>
+            <div class="col-md-5 text-md-end">
+                <span class="badge bg-success">Live Updates</span>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Plan Your Journey</h5>
+                        <form id="plannerForm" onsubmit="showRouteSummary(event)">
+                            <div class="mb-3">
+                                <label for="fromStation" class="form-label">From Station</label>
+                                <select class="form-select" id="fromStation" required>
+                                    <option selected>Choose station...</option>
+                                    <optgroup label="Yellow Line">
+                                        <option>R.V. Road</option>
+                                        <option>Jayanagar</option>
+                                        <option>South End Circle</option>
+                                        <option>Konanakunte Cross</option>
+                                        <option>Banashankari</option>
+                                        <option>Rajarajeshwari Nagar</option>
+                                        <option>Kengeri</option>
+                                        <option>Peenya</option>
+                                        <option>Bommasandra</option>
+                                    </optgroup>
+                                    <optgroup label="Green Line">
+                                        <option>Madavara</option>
+                                        <option>Yeshwantpur</option>
+                                        <option>Jalahalli</option>
+                                        <option>Hebbal</option>
+                                        <option>Yelahanka</option>
+                                        <option>Indiranagar</option>
+                                        <option>Silk Institute</option>
+                                    </optgroup>
+                                    <optgroup label="Purple Line">
+                                        <option>Kadugodi</option>
+                                        <option>Whitefield</option>
+                                        <option>Marathahalli</option>
+                                        <option>Silk Institute Purple</option>
+                                        <option>Indira Nagar</option>
+                                        <option>Majestic</option>
+                                        <option>Chamaraji Nagar</option>
+                                        <option>Rachapet</option>
+                                    </optgroup>
+                                    <optgroup label="Pink Line">
+                                        <option>Nagawara</option>
+                                        <option>Binnipete</option>
+                                        <option>Cantonment</option>
+                                        <option>Halasuru</option>
+                                        <option>MG Road</option>
+                                        <option>Cubbon Park</option>
+                                        <option>Vidhana Soudha</option>
+                                        <option>Vikaramnagar</option>
+                                        <option>Bannerghatta Road</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="toStation" class="form-label">To Station</label>
+                                <select class="form-select" id="toStation">
+                                    <option selected>Choose station...</option>
+                                    <optgroup label="Yellow Line">
+                                        <option>R.V. Road</option>
+                                        <option>Jayanagar</option>
+                                        <option>South End Circle</option>
+                                        <option>Konanakunte Cross</option>
+                                        <option>Banashankari</option>
+                                        <option>Rajarajeshwari Nagar</option>
+                                        <option>Kengeri</option>
+                                        <option>Peenya</option>
+                                        <option>Bommasandra</option>
+                                    </optgroup>
+                                    <optgroup label="Green Line">
+                                        <option>Madavara</option>
+                                        <option>Yeshwantpur</option>
+                                        <option>Jalahalli</option>
+                                        <option>Hebbal</option>
+                                        <option>Yelahanka</option>
+                                        <option>Indiranagar</option>
+                                        <option>Silk Institute</option>
+                                    </optgroup>
+                                    <optgroup label="Purple Line">
+                                        <option>Kadugodi</option>
+                                        <option>Whitefield</option>
+                                        <option>Marathahalli</option>
+                                        <option>Silk Institute Purple</option>
+                                        <option>Indira Nagar</option>
+                                        <option>Majestic</option>
+                                        <option>Chamaraji Nagar</option>
+                                        <option>Rachapet</option>
+                                    </optgroup>
+                                    <optgroup label="Pink Line">
+                                        <option>Nagawara</option>
+                                        <option>Binnipete</option>
+                                        <option>Cantonment</option>
+                                        <option>Halasuru</option>
+                                        <option>MG Road</option>
+                                        <option>Cubbon Park</option>
+                                        <option>Vidhana Soudha</option>
+                                        <option>Vikaramnagar</option>
+                                        <option>Bannerghatta Road</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Find Route</button>
+                        </form>
+                        <div id="plannerResult" class="alert alert-success mt-4" style="display:none;">
+                            <h6 class="mb-2">Route Recommendation</h6>
+                            <p id="plannerText" class="mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Fare & Journey Time Calculator</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="calcDistance" class="form-label">Distance (km)</label>
+                                <input type="number" class="form-control" id="calcDistance" placeholder="Enter distance">
+                            </div>
+                            <div class="mb-3">
+                                <label for="numStations" class="form-label">Number of Stations</label>
+                                <input type="number" class="form-control" id="numStations" placeholder="e.g., 5" value="1" min="1">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ticket Type</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ticketType" id="single" checked>
+                                    <label class="form-check-label" for="single">Single Journey</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="ticketType" id="return">
+                                    <label class="form-check-label" for="return">Return Journey</label>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success" onclick="calculateFareAndTime()">Calculate</button>
+                            <div id="resultDisplay" class="mt-3" style="display:none;">
+                                <div class="alert alert-info mb-2">
+                                    <strong>Estimated Fare: </strong><span id="fareAmount">₹0</span>
+                                </div>
+                                <div class="alert alert-primary">
+                                    <strong>Journey Time: </strong><span id="timeAmount">0 min</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stations-guide" class="bg-light py-5">
+        <div class="container">
+            <div class="d-flex align-items-center mb-4">
+                <span class="badge bg-info me-3">Stations</span>
+                <h2 class="mb-0">Major Metro Stations Guide</h2>
+            </div>
+            <p class="text-muted mb-5">Explore key stations across all Namma Metro lines with facilities and connecting points.</p>
+            
+            <!-- Yellow Line Stations -->
+            <div class="mb-5">
+                <h5 class="badge bg-warning text-dark mb-3">Yellow Line Stations</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-warning border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">R.V. Road</h6>
+                                <p class="card-text small">Starting point of Yellow Line. Key interchange with bus terminals nearby.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Parking, ATM, Food Court</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-warning border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Bommasandra</h6>
+                                <p class="card-text small">Terminal station for Yellow Line. Gateway to Electronic City and IT corridor.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Parking, WiFi, Restaurant</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-warning border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Jayanagar</h6>
+                                <p class="card-text small">Serves the residential and commercial zone of South Bengaluru.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: ATM, Medical Store, Shopping</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-warning border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Kengeri</h6>
+                                <p class="card-text small">Important interchange point with excellent connectivity to surrounding areas.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Parking, Cafe, Information Desk</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Green Line Stations -->
+            <div class="mb-5">
+                <h5 class="badge bg-success mb-3">Green Line Stations</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-success border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Madavara (BIEC)</h6>
+                                <p class="card-text small">Northern terminal of Green Line near Bangalore International Exhibition Centre.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Parking, Exhibition Hall Access</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-success border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Yeshwantpur</h6>
+                                <p class="card-text small">Major railway junction with excellent bus connectivity and commercial hubs.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Railway Connection, ATM, Food</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-success border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Yelahanka</h6>
+                                <p class="card-text small">Connects residential North Bengaluru with tech parks and educational institutions.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: ATM, Shopping, Schools/Colleges</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-success border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Silk Institute</h6>
+                                <p class="card-text small">Southern terminus near educational institutions and residential areas.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: ATM, Information, Parking</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purple Line Stations -->
+            <div class="mb-5">
+                <h5 class="badge bg-secondary mb-3">Purple Line Stations</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-secondary border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Kadugodi (Whitefield)</h6>
+                                <p class="card-text small">Eastern terminal serving Whitefield IT hub and surrounding tech parks.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Corporate Campus Access, Parking</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-secondary border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Whitefield</h6>
+                                <p class="card-text small">Major stop in IT hotspot with multiple office parks and commercial establishments.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Food Court, ATM, Shopping</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-secondary border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Marathahalli</h6>
+                                <p class="card-text small">Central business district with IT and tech startups, shopping malls, and restaurants.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Shopping Mall, Restaurants, Parking</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-secondary border-4">
+                            <div class="card-body">
+                                <h6 class="card-title">Majestic</h6>
+                                <p class="card-text small">Important interchange connecting Purple and Green lines, central business heart.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Bus Terminal, ATM, Information</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pink Line Stations -->
+            <div class="mb-5">
+                <h5 class="badge mb-3" style="background:#E83E8C; color:white;">Pink Line Stations</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-4" style="border-color:#E83E8C!important;">
+                            <div class="card-body">
+                                <h6 class="card-title">MG Road</h6>
+                                <p class="card-text small">Business and entertainment hub with premium shopping, dining, and corporate offices.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Shopping Hub, Restaurants, Nightlife</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-4" style="border-color:#E83E8C!important;">
+                            <div class="card-body">
+                                <h6 class="card-title">Cubbon Park</h6>
+                                <p class="card-text small">Near iconic Cubbon Park, government buildings, and major commercial establishments.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Park Access, Government Offices</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-4" style="border-color:#E83E8C!important;">
+                            <div class="card-body">
+                                <h6 class="card-title">Vidhana Soudha</h6>
+                                <p class="card-text small">Serves the state legislature and nearby cultural institutions and administrative areas.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Government Access, Information</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-start border-4" style="border-color:#E83E8C!important;">
+                            <div class="card-body">
+                                <h6 class="card-title">Bannerghatta Road</h6>
+                                <p class="card-text small">Southern terminal providing access to residential areas and Bannerghatta National Park.</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Facilities: Park Access, ATM, Parking</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="container py-5">
+        <div class="d-flex align-items-center mb-4">
+            <span class="badge bg-primary me-3">Testimonials</span>
+            <h2 class="mb-0">What Commuters Say</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">"Namma Metro has transformed my daily commute. It's fast, reliable, and comfortable."</p>
+                        <footer class="blockquote-footer">Rajesh Kumar, IT Professional</footer>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">"The stations are clean and well-maintained. Great experience for families too."</p>
+                        <footer class="blockquote-footer">Priya Sharma, Teacher</footer>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">"Eco-friendly and efficient. Namma Metro is the future of urban transport."</p>
+                        <footer class="blockquote-footer">Arun Patel, Business Owner</footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="bg-light py-5">
+        <div class="container">
+            <div class="d-flex align-items-center mb-4">
+                <span class="badge bg-info me-3">Latest News</span>
+                <h2 class="mb-0">Metro Updates & Announcements</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title">New Pink Line Extension</h6>
+                            <p class="card-text small">Exciting news! The Pink Line is expanding to cover more areas in South Bengaluru.</p>
+                            <small class="text-muted">Posted 2 days ago</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title">Holiday Timings</h6>
+                            <p class="card-text small">Check updated metro timings during upcoming festivals and holidays.</p>
+                            <small class="text-muted">Posted 1 week ago</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title">Safety Measures</h6>
+                            <p class="card-text small">Enhanced security protocols implemented across all stations.</p>
+                            <small class="text-muted">Posted 3 weeks ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="bg-light py-5">
+        <div class="container">
+            <div class="d-flex align-items-center mb-4">
+                <span class="badge bg-warning text-dark me-3">FAQ</span>
+                <h2 class="mb-0">Frequently Asked Questions</h2>
+            </div>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            What are the operating hours of Namma Metro?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Namma Metro operates from 5:00 AM to 11:00 PM on weekdays and 6:00 AM to 11:00 PM on weekends.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            How do I buy a metro ticket?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            You can buy tickets at station counters, through the Namma Metro app, or use smart cards for contactless payment.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Is the metro wheelchair accessible?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, all Namma Metro stations and trains are fully wheelchair accessible with ramps and dedicated spaces.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5 footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-7">
+                    <h3 class="mb-3">
+                        <i class="fas fa-info-circle me-2"></i>Stay Connected with Namma Metro
+                    </h3>
+                    <p class="lead mb-2">For travel updates, timings, and service alerts, contact the metro information desk or visit the official website.</p>
+                    <div class="mt-4">
+                        <p class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <strong>Phone:</strong> +91 80 1234 5678
+                        </p>
+                        <p class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <strong>Email:</strong> info@nammametro.com
+                        </p>
+                        <p class="mb-0">
+                            <i class="fas fa-clock me-2"></i>
+                            <strong>Hours:</strong> 5:00 AM - 11:00 PM Daily
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="card bg-white bg-opacity-10 border-white">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Quick Links</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <a href="#booking" class="text-white text-decoration-none">
+                                        <i class="fas fa-ticket-alt me-2"></i>Book Tickets
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a href="#planner" class="text-white text-decoration-none">
+                                        <i class="fas fa-route me-2"></i>Route Planner
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a href="#faq" class="text-white text-decoration-none">
+                                        <i class="fas fa-question-circle me-2"></i>FAQs
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#map" class="text-white text-decoration-none">
+                                        <i class="fas fa-map me-2"></i>Metro Map
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="py-5 bg-light">
+        <div class="container">
+            <div class="d-flex align-items-center mb-5">
+                <span class="badge bg-success me-3">Booking</span>
+                <h2 class="mb-0">Book Your Seat</h2>
+            </div>
+
+            <div class="row g-4">
+                <!-- Booking Form -->
+                <div class="col-lg-5">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Journey Details</h5>
+                            <form id="bookingForm">
+                                <div class="mb-3">
+                                    <label for="bookFromStation" class="form-label">From Station</label>
+                                    <select class="form-select" id="bookFromStation" required onchange="updateBookingPrice()">
+                                        <option selected>Select station...</option>
+                                        <optgroup label="Yellow Line">
+                                            <option value="R.V. Road">R.V. Road</option>
+                                            <option value="Jayanagar">Jayanagar</option>
+                                            <option value="Koramangala">Koramangala</option>
+                                            <option value="Bommasandra">Bommasandra</option>
+                                        </optgroup>
+                                        <optgroup label="Green Line">
+                                            <option value="Madavara">Madavara</option>
+                                            <option value="Yelahanka">Yelahanka</option>
+                                            <option value="Indiranagar">Indiranagar</option>
+                                            <option value="Silk Institute">Silk Institute</option>
+                                        </optgroup>
+                                        <optgroup label="Purple Line">
+                                            <option value="Kadugodi">Kadugodi</option>
+                                            <option value="Whitefield">Whitefield</option>
+                                            <option value="Marathahalli">Marathahalli</option>
+                                        </optgroup>
+                                        <optgroup label="Pink Line">
+                                            <option value="MG Road">MG Road</option>
+                                            <option value="Nagawara">Nagawara</option>
+                                            <option value="Bannerghatta Road">Bannerghatta Road</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="bookToStation" class="form-label">To Station</label>
+                                    <select class="form-select" id="bookToStation" required onchange="updateBookingPrice()">
+                                        <option selected>Select station...</option>
+                                        <optgroup label="Yellow Line">
+                                            <option value="R.V. Road">R.V. Road</option>
+                                            <option value="Jayanagar">Jayanagar</option>
+                                            <option value="Koramangala">Koramangala</option>
+                                            <option value="Bommasandra">Bommasandra</option>
+                                        </optgroup>
+                                        <optgroup label="Green Line">
+                                            <option value="Madavara">Madavara</option>
+                                            <option value="Yelahanka">Yelahanka</option>
+                                            <option value="Indiranagar">Indiranagar</option>
+                                            <option value="Silk Institute">Silk Institute</option>
+                                        </optgroup>
+                                        <optgroup label="Purple Line">
+                                            <option value="Kadugodi">Kadugodi</option>
+                                            <option value="Whitefield">Whitefield</option>
+                                            <option value="Marathahalli">Marathahalli</option>
+                                        </optgroup>
+                                        <optgroup label="Pink Line">
+                                            <option value="MG Road">MG Road</option>
+                                            <option value="Nagawara">Nagawara</option>
+                                            <option value="Bannerghatta Road">Bannerghatta Road</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="travelDate" class="form-label">Travel Date</label>
+                                    <input type="date" class="form-control" id="travelDate" required onchange="updateBookingPrice()">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="travelTime" class="form-label">Travel Time</label>
+                                    <select class="form-select" id="travelTime" required onchange="updateBookingPrice()">
+                                        <option selected>Select time...</option>
+                                        <option value="06:00 AM">06:00 AM</option>
+                                        <option value="07:00 AM">07:00 AM</option>
+                                        <option value="08:00 AM">08:00 AM</option>
+                                        <option value="09:00 AM">09:00 AM</option>
+                                        <option value="12:00 PM">12:00 PM</option>
+                                        <option value="03:00 PM">03:00 PM</option>
+                                        <option value="06:00 PM">06:00 PM</option>
+                                        <option value="09:00 PM">09:00 PM</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="passengerName" class="form-label">Passenger Name</label>
+                                    <input type="text" class="form-control" id="passengerName" placeholder="Enter your name" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="passengerPhone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="passengerPhone" placeholder="Enter phone number" required>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="button" class="btn btn-primary btn-lg" onclick="selectSeats()">Select Seat</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seat Selection -->
+                <div class="col-lg-7">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Available Seats</h5>
+                            
+                            <!-- Seat Legend -->
+                            <div class="mb-4">
+                                <div class="row g-3">
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="seat-legend seat-available"></div>
+                                            <small>Available</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="seat-legend seat-premium"></div>
+                                            <small>Premium</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="seat-legend seat-selected"></div>
+                                            <small>Selected</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="seat-legend seat-booked"></div>
+                                            <small>Booked</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Seat Grid -->
+                            <div class="seat-container overflow-auto mb-4" style="max-height: 400px; background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                                <div id="seatGrid" class="d-grid" style="grid-template-columns: repeat(6, 1fr); gap: 10px;">
+                                    <!-- Seats will be generated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- Booking Summary -->
+                            <div id="bookingSummary" class="alert alert-info" style="display:none;">
+                                <h6 class="mb-3">Booking Summary</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <small><strong>Route:</strong><br>
+                                        <span id="summaryRoute">Not selected</span></small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small><strong>Seat(s):</strong><br>
+                                        <span id="summarySeats">None</span></small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small><strong>Date & Time:</strong><br>
+                                        <span id="summaryDateTime">Not selected</span></small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small><strong>Total Price:</strong><br>
+                                        <span id="summaryPrice" style="font-size: 18px; color: #007bff; font-weight: bold;">₹0</span></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-success btn-lg" id="confirmBooking" onclick="confirmBooking()" style="display:none;">
+                                    <i class="fas fa-check me-2"></i>Confirm Booking
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetBooking()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        const totalSeats = 40;
+        const bookedSeats = [2, 5, 8, 12, 15, 18, 22, 25, 28, 32];
+        const premiumSeats = [1, 6, 11, 16, 21, 26, 31, 36];
+        let selectedSeats = [];
+        const baseFare = 20;
+
+        // Initialize seats
+        function initializeSeats() {
+            const seatGrid = document.getElementById('seatGrid');
+            seatGrid.innerHTML = '';
+            
+            for (let i = 1; i <= totalSeats; i++) {
+                const seat = document.createElement('div');
+                seat.className = 'seat';
+                seat.textContent = i;
+                seat.id = `seat-${i}`;
+                
+                if (bookedSeats.includes(i)) {
+                    seat.classList.add('booked');
+                    seat.style.pointerEvents = 'none';
+                } else if (premiumSeats.includes(i)) {
+                    seat.classList.add('premium');
+                }
+                
+                seat.addEventListener('click', toggleSeat);
+                seatGrid.appendChild(seat);
+            }
+        }
+
+        function toggleSeat(event) {
+            const seatNum = parseInt(event.target.id.split('-')[1]);
+            if (bookedSeats.includes(seatNum)) return;
+            
+            const seat = event.target;
+            if (seat.classList.contains('selected')) {
+                seat.classList.remove('selected');
+                selectedSeats = selectedSeats.filter(s => s !== seatNum);
+            } else {
+                seat.classList.add('selected');
+                selectedSeats.push(seatNum);
+            }
+            updateBookingPrice();
+        }
+
+        function updateBookingPrice() {
+            const fromStation = document.getElementById('bookFromStation').value;
+            const toStation = document.getElementById('bookToStation').value;
+            const date = document.getElementById('travelDate').value;
+            const time = document.getElementById('travelTime').value;
+
+            if (!fromStation || fromStation === 'Select station...' || !toStation || toStation === 'Select station...' || !date || !time || selectedSeats.length === 0) {
+                document.getElementById('bookingSummary').style.display = 'none';
+                document.getElementById('confirmBooking').style.display = 'none';
+                return;
+            }
+
+            let pricePerSeat = baseFare + 10; // ₹30 base
+            const isPremium = selectedSeats.some(s => premiumSeats.includes(s));
+            if (isPremium) pricePerSeat += 15; // ₹15 premium charge
+
+            const totalPrice = pricePerSeat * selectedSeats.length;
+
+            document.getElementById('summaryRoute').textContent = `${fromStation} → ${toStation}`;
+            document.getElementById('summarySeats').textContent = selectedSeats.sort((a, b) => a - b).join(', ');
+            document.getElementById('summaryDateTime').textContent = `${date} at ${time}`;
+            document.getElementById('summaryPrice').textContent = `₹${totalPrice}`;
+            
+            document.getElementById('bookingSummary').style.display = 'block';
+            document.getElementById('confirmBooking').style.display = 'block';
+        }
+
+        function selectSeats() {
+            const fromStation = document.getElementById('bookFromStation').value;
+            const toStation = document.getElementById('bookToStation').value;
+            
+            if (fromStation === 'Select station...' || toStation === 'Select station...') {
+                alert('Please select both stations');
+                return;
+            }
+            
+            if (fromStation === toStation) {
+                alert('From and To stations must be different');
+                return;
+            }
+            
+            initializeSeats();
+        }
+
+        function confirmBooking() {
+            const name = document.getElementById('passengerName').value;
+            const phone = document.getElementById('passengerPhone').value;
+            const fromStation = document.getElementById('bookFromStation').value;
+            const toStation = document.getElementById('bookToStation').value;
+            const price = document.getElementById('summaryPrice').textContent;
+
+            if (!name || !phone) {
+                alert('Please fill in passenger details');
+                return;
+            }
+
+            if (selectedSeats.length === 0) {
+                alert('Please select at least one seat');
+                return;
+            }
+
+            alert(`✅ Booking Confirmed!\n\nPassenger: ${name}\nRoute: ${fromStation} → ${toStation}\nSeats: ${selectedSeats.join(', ')}\nTotal: ${price}\n\nBooking reference will be sent to ${phone}`);
+            
+            resetBooking();
+        }
+
+        function resetBooking() {
+            document.getElementById('bookingForm').reset();
+            selectedSeats = [];
+            document.getElementById('seatGrid').innerHTML = '';
+            document.getElementById('bookingSummary').style.display = 'none';
+            document.getElementById('confirmBooking').style.display = 'none';
+        }
+
+        function showRouteSummary(event) {
+            event.preventDefault();
+            const fromStation = document.getElementById('fromStation').value;
+            const toStation = document.getElementById('toStation').value;
+            const ticketType = document.querySelector('input[name="ticketType"]:checked').id;
+
+            if (!fromStation || !toStation || fromStation === toStation) {
+                alert('Please choose two different stations to plan your route.');
+                return;
+            }
+
+            let recommendation = `Best route from ${fromStation} to ${toStation}: `;
+            if (fromStation === 'Majestic' || toStation === 'Majestic') {
+                recommendation += 'Use the interchange station at Majestic for seamless transfer.';
+            } else {
+                recommendation += 'Check if your stations are on the same line or use Majestic interchange if needed.';
+            }
+            if (ticketType === 'return') {
+                recommendation += ' Return ticket selected gives the best value for both journeys.';
+            }
+
+            document.getElementById('plannerText').textContent = recommendation;
+            document.getElementById('plannerResult').style.display = 'block';
+        }
+
+        // Set minimum date to today
+        document.getElementById('travelDate').min = new Date().toISOString().split('T')[0];
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+    <section id="app-download" class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="mb-4">Download the Namma Metro App</h2>
+            <p class="mb-4">Get real-time updates, plan your journeys, and buy tickets on the go!</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="#" class="btn btn-light px-4 py-3 shadow-sm">
+                    <i class="fab fa-apple me-2"></i>App Store
+                </a>
+                <a href="#" class="btn btn-outline-light px-4 py-3 shadow-sm">
+                    <i class="fab fa-google-play me-2"></i>Google Play
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <button id="backToTop" class="btn btn-primary rounded-circle shadow-lg">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <footer class="py-3 bg-dark text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <small>&copy; 2026 Namma Metro. Designed to help Bengaluru commuters travel smarter.</small>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex justify-content-md-end justify-content-center gap-3">
+                        <a href="#" class="text-white" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoMjF6NYdFQZ2coVq+Kj7r8/sA7G5x5OJ0Z2STyNQm2aAaz"
+        crossorigin="anonymous"></script>
+    <script>
+        function calculateFareAndTime() {
+            const distance = parseFloat(document.getElementById('calcDistance').value);
+            const stations = parseInt(document.getElementById('numStations').value);
+            const ticketType = document.querySelector('input[name="ticketType"]:checked').id;
+            
+            if (isNaN(distance) || distance <= 0) {
+                alert('Please enter a valid distance.');
+                return;
+            }
+            if (isNaN(stations) || stations <= 0) {
+                alert('Please enter a valid number of stations.');
+                return;
+            }
+            
+            // Fare calculation: Base fare + per km charge
+            let fare = 20 + (distance * 6); // 20 base + 6 per km
+            if (ticketType === 'return') {
+                fare *= 1.8; // 80% base + discount for return
+            }
+            
+            // Journey time calculation:
+            // Average metro speed: 25-30 km/h depending on traffic
+            let travelTime = (distance / 25) * 60; // in minutes
+            // Add 2 minutes per station stop
+            let stopTime = stations * 2;
+            // Add 5 minutes for boarding/general walking
+            let totalTime = Math.round(travelTime + stopTime + 5);
+            
+            // Display results
+            document.getElementById('fareAmount').textContent = '₹' + fare.toFixed(2);
+            document.getElementById('timeAmount').textContent = totalTime + ' min';
+            document.getElementById('resultDisplay').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

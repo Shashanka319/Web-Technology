@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Karnataka Tourism Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="stylesheet" href="userinfo.css">
+</head>
+<body>
+    <header id="main-header">
+        <h1>👤 User Profile</h1>
+        <p><em>Manage your travel account and preferences</em></p>
+    </header>
+
+    <nav>
+        <h3>Navigation</h3>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="attractions.html">Attractions</a></li>
+            <li><a href="bestplaces.html">Best Places</a></li>
+            <li><a href="bookinginfo.html">Booking</a></li>
+            <li><a href="estimation.html">Budget</a></li>
+        </ul>
+    </nav>
+
+    <div class="profile-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <img src="https://via.placeholder.com/150" alt="Profile Picture">
+                </div>
+                <h3>John Traveler</h3>
+                <p class="email">john.traveler@email.com</p>
+                <p class="member-since">Member since 2024</p>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Trips</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Reviews</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">⭐ 4.8</span>
+                        <span class="stat-label">Rating</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-menu">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#personal-info" class="active">Personal Info</a></li>
+                    <li><a href="#bookings">My Bookings</a></li>
+                    <li><a href="#wishlist">Wishlist</a></li>
+                    <li><a href="#reviews">My Reviews</a></li>
+                    <li><a href="#preferences">Preferences</a></li>
+                    <li><a href="#security">Security</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Personal Information -->
+            <section id="personal-info" class="content-section">
+                <div class="section-header">
+                    <h2>Personal Information</h2>
+                    <button class="edit-btn">✎ Edit</button>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <label>First Name</label>
+                        <p>John</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Last Name</label>
+                        <p>Traveler</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Email Address</label>
+                        <p>john.traveler@email.com</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Phone Number</label>
+                        <p>+91-XXXXXXXXXX</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Date of Birth</label>
+                        <p>January 15, 1990</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Nationality</label>
+                        <p>Indian</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Address</label>
+                        <p>123, Tourist Street, Bangalore - 560001</p>
+                    </div>
+                    <div class="info-card">
+                        <label>Preferred Language</label>
+                        <p>English</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Bookings -->
+            <section id="bookings" class="content-section">
+                <h2>My Bookings</h2>
+                <div class="bookings-container">
+                    <!-- Booking 1 -->
+                    <div class="booking-card">
+                        <div class="booking-header">
+                            <h3>Mysore Heritage Tour</h3>
+                            <span class="status completed">✓ Completed</span>
+                        </div>
+                        <div class="booking-details">
+                            <p><strong>Date:</strong> March 15-19, 2024</p>
+                            <p><strong>Duration:</strong> 5 Days / 4 Nights</p>
+                            <p><strong>Total Cost:</strong> ₹12,000</p>
+                            <p><strong>Number of Guests:</strong> 2</p>
+                        </div>
+                        <button class="action-btn">View Details</button>
+                    </div>
+
+                    <!-- Booking 2 -->
+                    <div class="booking-card">
+                        <div class="booking-header">
+                            <h3>Gokarna Beach Escape</h3>
+                            <span class="status upcoming">⏳ Upcoming</span>
+                        </div>
+                        <div class="booking-details">
+                            <p><strong>Date:</strong> May 10-13, 2024</p>
+                            <p><strong>Duration:</strong> 4 Days / 3 Nights</p>
+                            <p><strong>Total Cost:</strong> ₹10,000</p>
+                            <p><strong>Number of Guests:</strong> 3</p>
+                        </div>
+                        <button class="action-btn">Manage Booking</button>
+                    </div>
+
+                    <!-- Booking 3 -->
+                    <div class="booking-card">
+                        <div class="booking-header">
+                            <h3>Dandeli Adventure Quest</h3>
+                            <span class="status upcoming">⏳ Upcoming</span>
+                        </div>
+                        <div class="booking-details">
+                            <p><strong>Date:</strong> June 5-10, 2024</p>
+                            <p><strong>Duration:</strong> 6 Days / 5 Nights</p>
+                            <p><strong>Total Cost:</strong> ₹18,000</p>
+                            <p><strong>Number of Guests:</strong> 4</p>
+                        </div>
+                        <button class="action-btn">Manage Booking</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wishlist -->
+            <section id="wishlist" class="content-section">
+                <h2>My Wishlist</h2>
+                <div class="wishlist-grid">
+                    <div class="wishlist-item">
+                        <img src="https://imgs.search.brave.com/mLoc28I-osTy9nbqd8CpNzSO89NCS19Ye2k5m4iYLDA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9icmluZGF2YW5nYXJkZW4uaW4vd3AtY29udGVudC91cGxvYWRzLzIwMjUvMTIvaW1hZ2UtNTcucG5n" alt="Chamundi Hill">
+                        <h4>Chamundi Hill</h4>
+                        <p>Sacred hilltop shrine with panoramic views</p>
+                        <button class="wishlist-btn remove-btn">✕ Remove</button>
+                    </div>
+                    <div class="wishlist-item">
+                        <img src="https://imgs.search.brave.com/N9N9N9N9N9N9N9N9N9/rs:fit:500:0:1:0" alt="Jog Falls">
+                        <h4>Jog Falls</h4>
+                        <p>One of India's highest waterfalls</p>
+                        <button class="wishlist-btn remove-btn">✕ Remove</button>
+                    </div>
+                    <div class="wishlist-item">
+                        <img src="https://imgs.search.brave.com/H8H8H8H8H8/rs:fit:500:0:1:0" alt="Hampi">
+                        <h4>Hampi - UNESCO Site</h4>
+                        <p>Ancient Vijayanagara Empire ruins</p>
+                        <button class="wishlist-btn remove-btn">✕ Remove</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reviews -->
+            <section id="reviews" class="content-section">
+                <h2>My Reviews</h2>
+                <div class="reviews-container">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <h4>Mysore Palace Tour</h4>
+                            <span class="rating">⭐⭐⭐⭐⭐ 5/5</span>
+                        </div>
+                        <p class="review-date">Reviewed on March 20, 2024</p>
+                        <p class="review-text">Amazing experience! The palace was breathtaking with stunning architecture. Our guide was knowledgeable and friendly. Highly recommended for history enthusiasts!</p>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <h4>Coorg Coffee Plantation Tour</h4>
+                            <span class="rating">⭐⭐⭐⭐☆ 4/5</span>
+                        </div>
+                        <p class="review-date">Reviewed on January 12, 2024</p>
+                        <p class="review-text">Beautiful plantation with lush green hills. The coffee tasting was delightful. Could have been better with more trekking options, but overall a good experience.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preferences -->
+            <section id="preferences" class="content-section">
+                <div class="section-header">
+                    <h2>Travel Preferences</h2>
+                    <button class="edit-btn">✎ Edit</button>
+                </div>
+
+                <div class="preferences-grid">
+                    <div class="pref-card">
+                        <label>Preferred Accommodation</label>
+                        <p>Comfort Hotel</p>
+                    </div>
+                    <div class="pref-card">
+                        <label>Meal Preference</label>
+                        <p>Mixed Vegetarian & Non-Veg</p>
+                    </div>
+                    <div class="pref-card">
+                        <label>Activity Preference</label>
+                        <p>Adventure & Culture</p>
+                    </div>
+                    <div class="pref-card">
+                        <label>Travel Group Size</label>
+                        <p>2-4 people</p>
+                    </div>
+                    <div class="pref-card">
+                        <label>Budget Range</label>
+                        <p>₹10,000 - ₹20,000 per day</p>
+                    </div>
+                    <div class="pref-card">
+                        <label>Preferred Season</label>
+                        <p>October - February</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security -->
+            <section id="security" class="content-section">
+                <h2>Security Settings</h2>
+                <div class="security-cards">
+                    <div class="security-card">
+                        <h4>Password</h4>
+                        <p>Last changed 3 months ago</p>
+                        <button class="change-btn">Change Password</button>
+                    </div>
+                    <div class="security-card">
+                        <h4>Two-Factor Authentication</h4>
+                        <p>Status: Disabled</p>
+                        <button class="change-btn">Enable 2FA</button>
+                    </div>
+                    <div class="security-card">
+                        <h4>Login History</h4>
+                        <p>Last login: Today at 10:30 AM</p>
+                        <button class="change-btn">View History</button>
+                    </div>
+                    <div class="security-card">
+                        <h4>Connected Devices</h4>
+                        <p>1 device currently connected</p>
+                        <button class="change-btn">Manage Devices</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Danger Zone -->
+            <section id="danger-zone" class="content-section danger">
+                <h2>Danger Zone</h2>
+                <div class="danger-cards">
+                    <div class="danger-card">
+                        <h4>Deactivate Account</h4>
+                        <p>Temporarily deactivate your account while keeping your data.</p>
+                        <button class="danger-btn">Deactivate</button>
+                    </div>
+                    <div class="danger-card">
+                        <h4>Delete Account</h4>
+                        <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+                        <button class="danger-btn delete">Delete Account</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Karnataka Tourism Guide. All rights reserved.</p>
+        <p>Contact: info@karnatakatourism.com | Phone: +91-XXXX-XXXXXX</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,387 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+#main-header {
+    background: linear-gradient(135deg, #5b9bd5 0%, #7c3aed 100%);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#main-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Arial', sans-serif;
+}
+
+#main-header p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+/* Navigation */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav h3 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+    font-weight: 700;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    background-color: #5b9bd5;
+    transform: translateY(-2px);
+}
+
+/* Intro */
+#budget-intro {
+    background: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#budget-intro h2 {
+    color: #5b9bd5;
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+#budget-intro p {
+    font-size: 1.05rem;
+    color: #666;
+}
+
+/* Budget Calculator */
+#budget-calculator {
+    background: white;
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#budget-calculator h3 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.calculator-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.calculator-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.input-group input,
+.input-group select {
+    padding: 0.9rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #5b9bd5;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+}
+
+/* Budget Breakdown */
+.budget-breakdown {
+    background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 4px solid #5b9bd5;
+}
+
+.budget-breakdown h4 {
+    color: #333;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    font-size: 1rem;
+    color: #666;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.breakdown-item span:first-child {
+    font-weight: 500;
+}
+
+.breakdown-item span:last-child {
+    font-weight: 600;
+    color: #5b9bd5;
+}
+
+.breakdown-divider {
+    height: 2px;
+    background: #5b9bd5;
+    margin: 1rem 0;
+}
+
+.breakdown-item.total {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    border-bottom: none;
+    margin-top: 0.5rem;
+}
+
+.breakdown-item.total span:last-child {
+    font-size: 1.4rem;
+}
+
+/* Expense Guide */
+#expense-guide {
+    padding: 3rem 2rem;
+    background: white;
+}
+
+#expense-guide h3 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.tables-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+}
+
+.expense-table {
+    background: #f9f9f9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.expense-table h4 {
+    background: linear-gradient(135deg, #5b9bd5, #7c3aed);
+    color: white;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.expense-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.expense-table th {
+    background-color: #e8e8e8;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+}
+
+.expense-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    color: #666;
+}
+
+.expense-table tr:hover {
+    background-color: #f0f0f0;
+}
+
+.expense-table td:first-child {
+    font-weight: 600;
+    color: #5b9bd5;
+}
+
+/* Tips Section */
+#tips {
+    padding: 3rem 2rem;
+    background: white;
+}
+
+#tips h3 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.tip-card {
+    background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 4px solid #5b9bd5;
+    transition: all 0.3s ease;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.15);
+}
+
+.tip-card h4 {
+    color: #5b9bd5;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.tip-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .calculator-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    #main-header h1 {
+        font-size: 1.8rem;
+    }
+
+    #budget-calculator {
+        padding: 2rem 1rem;
+    }
+
+    .tables-container {
+        grid-template-columns: 1fr;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 0.7rem 1rem;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    #main-header {
+        padding: 2rem 1rem;
+    }
+
+    #main-header h1 {
+        font-size: 1.3rem;
+    }
+
+    #budget-calculator h3 {
+        font-size: 1.4rem;
+    }
+
+    .breakdown-item {
+        font-size: 0.9rem;
+    }
+
+    .expense-table h4 {
+        font-size: 1rem;
+    }
+
+    .expense-table th,
+    .expense-table td {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+}

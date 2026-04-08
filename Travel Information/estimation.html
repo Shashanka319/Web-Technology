@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Estimation - Karnataka Tourism Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="stylesheet" href="estimation.css">
+</head>
+<body>
+    <header id="main-header">
+        <h1>💰 Travel Budget Estimation</h1>
+        <p><em>Plan your budget for a perfect Karnataka trip</em></p>
+    </header>
+
+    <nav>
+        <h3>Navigation</h3>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="attractions.html">Attractions</a></li>
+            <li><a href="bestplaces.html">Best Places</a></li>
+            <li><a href="bookinginfo.html">Booking</a></li>
+            <li><a href="userinfo.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <section id="budget-intro">
+        <h2>Calculate Your Travel Expenses</h2>
+        <p>Get an estimate of your total travel budget based on duration, accommodation preferences, and activities.</p>
+    </section>
+
+    <!-- Budget Calculator -->
+    <section id="budget-calculator">
+        <div class="calculator-container">
+            <h3>Budget Calculation Tool</h3>
+            <div class="calculator-inputs">
+                <div class="input-group">
+                    <label for="days">Number of Days *</label>
+                    <input type="number" id="days" min="1" value="5">
+                </div>
+
+                <div class="input-group">
+                    <label for="accommodation">Accommodation Type *</label>
+                    <select id="accommodation">
+                        <option value="budget">Budget Hotel (₹500/night)</option>
+                        <option value="comfort">Comfort Hotel (₹1000/night)</option>
+                        <option value="premium">Premium Hotel (₹2000/night)</option>
+                        <option value="luxury">Luxury Resort (₹3500/night)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="people">Number of People *</label>
+                    <input type="number" id="people" min="1" value="2">
+                </div>
+
+                <div class="input-group">
+                    <label for="meals">Meal Preference *</label>
+                    <select id="meals">
+                        <option value="budget">Budget (₹300/day)</option>
+                        <option value="average">Average (₹700/day)</option>
+                        <option value="premium">Premium (₹1200/day)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="activities">Activities & Sightseeing *</label>
+                    <select id="activities">
+                        <option value="low">Light (₹1000/day)</option>
+                        <option value="medium">Moderate (₹2000/day)</option>
+                        <option value="high">Intensive (₹3500/day)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="transport">Transport Mode *</label>
+                    <select id="transport">
+                        <option value="public">Public Transport (₹500/day)</option>
+                        <option value="shared">Shared Cab (₹1000/day)</option>
+                        <option value="private">Private Car (₹2000/day)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Budget Breakdown -->
+            <div class="budget-breakdown">
+                <h4>Budget Breakdown</h4>
+                <div class="breakdown-item">
+                    <span>Accommodation</span>
+                    <span id="accom-cost">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Meals</span>
+                    <span id="meals-cost">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Activities & Entry Fees</span>
+                    <span id="activities-cost">₹0</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Transport</span>
+                    <span id="transport-cost">₹0</span>
+                </div>
+                <div class="breakdown-divider"></div>
+                <div class="breakdown-item total">
+                    <span>TOTAL COST (Per Person)</span>
+                    <span id="total-cost">₹0</span>
+                </div>
+                <div class="breakdown-item total">
+                    <span>TOTAL COST (All People)</span>
+                    <span id="total-group-cost">₹0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Budget Breakdown Table -->
+    <section id="expense-guide">
+        <h3>Expense Breakdown Guide</h3>
+        <div class="tables-container">
+            <!-- Accommodation Table -->
+            <div class="expense-table">
+                <h4>📍 Accommodation</h4>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Price/Night</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Budget</td>
+                        <td>₹300-500</td>
+                        <td>Basic rooms, no frills</td>
+                    </tr>
+                    <tr>
+                        <td>Comfort</td>
+                        <td>₹800-1200</td>
+                        <td>Good amenities, AC</td>
+                    </tr>
+                    <tr>
+                        <td>Premium</td>
+                        <td>₹1500-2500</td>
+                        <td>Luxury features, restaurant</td>
+                    </tr>
+                    <tr>
+                        <td>Luxury</td>
+                        <td>₹3000+</td>
+                        <td>5-star resorts, full service</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Food Expenses Table -->
+            <div class="expense-table">
+                <h4>🍽️ Food & Dining</h4>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Budget/Day</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Budget</td>
+                        <td>₹250-350</td>
+                        <td>Local street food, small eateries</td>
+                    </tr>
+                    <tr>
+                        <td>Average</td>
+                        <td>₹600-800</td>
+                        <td>Mid-range restaurants</td>
+                    </tr>
+                    <tr>
+                        <td>Premium</td>
+                        <td>₹1000-1500</td>
+                        <td>Fine dining, upscale restaurants</td>
+                    </tr>
+                    <tr>
+                        <td>Mix</td>
+                        <td>₹500-1000</td>
+                        <td>Combination of different options</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Activities Table -->
+            <div class="expense-table">
+                <h4>🎫 Activities & Entry Fees</h4>
+                <table>
+                    <tr>
+                        <th>Attraction</th>
+                        <th>Entry Fee</th>
+                        <th>Duration</th>
+                    </tr>
+                    <tr>
+                        <td>Mysore Palace</td>
+                        <td>₹900</td>
+                        <td>2-3 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Hampi Ruins</td>
+                        <td>₹40/600</td>
+                        <td>Full day</td>
+                    </tr>
+                    <tr>
+                        <td>Jog Falls</td>
+                        <td>₹20</td>
+                        <td>4-5 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Adventure Sports</td>
+                        <td>₹1500-3000</td>
+                        <td>2-4 hours</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Transport Table -->
+            <div class="expense-table">
+                <h4>🚌 Transport & Travel</h4>
+                <table>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Cost/Day</th>
+                        <th>Best For</th>
+                    </tr>
+                    <tr>
+                        <td>Public Bus</td>
+                        <td>₹300-500</td>
+                        <td>Budget travelers</td>
+                    </tr>
+                    <tr>
+                        <td>Shared Cab</td>
+                        <td>₹800-1200</td>
+                        <td>Groups & budget comfort</td>
+                    </tr>
+                    <tr>
+                        <td>Private Car</td>
+                        <td>₹1500-2500</td>
+                        <td>Convenience & comfort</td>
+                    </tr>
+                    <tr>
+                        <td>Local Taxi</td>
+                        <td>₹400-800</td>
+                        <td>City exploration</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practical Tips -->
+    <section id="tips">
+        <h3>Budget-Saving Tips</h3>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <h4>💡 Travel Off-Season</h4>
+                <p>Visit during non-peak seasons (May-June, October) for better rates on accommodations</p>
+            </div>
+            <div class="tip-card">
+                <h4>🍽️ Eat Like Locals</h4>
+                <p>Try street food and local eateries for authentic cuisine at half the cost of restaurants</p>
+            </div>
+            <div class="tip-card">
+                <h4>🚌 Use Public Transport</h4>
+                <p>Karnataka has good public transport network. Save money by using buses and trains</p>
+            </div>
+            <div class="tip-card">
+                <h4>🎟️ Group Discounts</h4>
+                <p>Travel in groups of 10+ to get 10-15% discounts on packages and entry fees</p>
+            </div>
+            <div class="tip-card">
+                <h4>📱 Book Online</h4>
+                <p>Pre-book hotels and activities online for better prices and advance discounts</p>
+            </div>
+            <div class="tip-card">
+                <h4>🎒 Budget Hotels</h4>
+                <p>Consider budget hotels or homestays for comfortable yet affordable stay</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Karnataka Tourism Guide. All rights reserved.</p>
+        <p>Contact: info@karnatakatourism.com | Phone: +91-XXXX-XXXXXX</p>
+    </footer>
+</body>
+</html>

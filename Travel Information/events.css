@@ -1,0 +1,358 @@
+/* ===== EVENTS PAGE STYLING ===== */
+
+.events-hero {
+    background: linear-gradient(135deg, #5b9bd5 0%, #7c3aed 100%);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.events-hero .hero-content h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.events-hero .hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Events Grid Section */
+.events-grid {
+    padding: 60px 20px;
+    background-color: #f5f5f5;
+}
+
+.events-grid .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.events-grid h2 {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.events-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.event-card {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1.5rem;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(76, 175, 80, 0.2);
+}
+
+.event-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: linear-gradient(135deg, #5b9bd5 0%, #7c3aed 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    height: fit-content;
+}
+
+.event-date .month {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.event-date .year {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.event-content h3 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.event-location {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 5px 0;
+}
+
+.event-description {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.event-meta {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.event-type,
+.event-duration {
+    display: inline-block;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Event Categories Section */
+.event-categories {
+    padding: 60px 20px;
+    background: white;
+}
+
+.event-categories .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.event-categories h2 {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.category-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.category-card {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8f5e9 100%);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.category-card:hover {
+    border-color: #5b9bd5;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.15);
+}
+
+.category-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.category-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    background: linear-gradient(135deg, #5b9bd5 0%, #7c3aed 100%);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.newsletter-section .container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.newsletter-section h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.newsletter-section > .container > p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+}
+
+.newsletter-form button {
+    padding: 12px 30px;
+    background-color: white;
+    color: #5b9bd5;
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background-color: #f5f5f5;
+    transform: scale(1.05);
+}
+
+/* Footer */
+#main-footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h4 {
+    color: #5b9bd5;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #5b9bd5;
+}
+
+.social-links {
+    margin-top: 15px;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #555;
+    padding-top: 20px;
+    color: #999;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .events-hero .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .events-grid h2 {
+        font-size: 1.8rem;
+    }
+
+    .events-container {
+        grid-template-columns: 1fr;
+    }
+
+    .event-card {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .event-date {
+        flex-direction: row;
+        justify-content: center;
+        height: auto;
+    }
+
+    .category-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .events-hero .hero-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .events-hero {
+        padding: 40px 15px;
+    }
+
+    .events-grid {
+        padding: 40px 15px;
+    }
+
+    .events-grid h2 {
+        font-size: 1.5rem;
+    }
+
+    .event-card {
+        padding: 15px;
+    }
+
+    .category-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        padding: 20px;
+    }
+
+    .newsletter-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
