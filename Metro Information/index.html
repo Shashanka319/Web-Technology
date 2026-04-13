@@ -10,104 +10,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            background: #f7f9fc;
-            color: #202940;
-        }
-        .hero {
-            min-height: 80vh;
-            background: linear-gradient(135deg, rgba(19, 78, 206, 0.85), rgba(31, 171, 225, 0.85)), url('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-            color: white;
-        }
-        .hero-overlay {
-            backdrop-filter: blur(3px);
-            background: rgba(0, 0, 0, 0.35);
-        }
-        .footer {
-            background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
-            color: white;
-        }
-        .footer h3,
-        .footer h4,
-        .footer strong {
-            color: white;
-            font-weight: 600;
-        }
-        .footer p,
-        .footer small {
-            color: rgba(255, 255, 255, 0.95);
-            line-height: 1.6;
-        }
-        .seat-legend {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-        }
-        .seat-available {
-            background-color: #28A745;
-            border: 2px solid #1e7e34;
-        }
-        .seat-premium {
-            background-color: #FFD700;
-            border: 2px solid #DAA520;
-        }
-        .seat-selected {
-            background-color: #0d6efd;
-            border: 2px solid #0b5ed7;
-        }
-        .seat-booked {
-            background-color: #dc3545;
-            border: 2px solid #bb2d3b;
-        }
-        .seat {
-            width: 100%;
-            aspect-ratio: 1;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            background-color: #28A745;
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .seat:hover:not(.seat.booked) {
-            transform: scale(1.05);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
-        }
-        .seat.premium {
-            background-color: #FFD700;
-            color: #333;
-        }
-        .seat.selected {
-            background-color: #0d6efd;
-            border-color: #0b5ed7;
-            box-shadow: 0 0 8px rgba(13, 110, 253, 0.5);
-        }
-        .seat.booked {
-            background-color: #dc3545;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        #backToTop {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 48px;
-            height: 48px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-    </style>
 </head>
 
 <body class="bg-light text-dark">
@@ -914,11 +816,11 @@
         </div>
     </section>
 
-    <section id="contact" class="py-5 footer">
+    <section id="contact" class="py-5 bg-primary bg-gradient text-white">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-7">
-                    <h3 class="mb-3">
+                    <h3 class="mb-3 text-white">
                         <i class="fas fa-info-circle me-2"></i>Stay Connected with Namma Metro
                     </h3>
                     <p class="lead mb-2">For travel updates, timings, and service alerts, contact the metro information desk or visit the official website.</p>
@@ -1091,25 +993,25 @@
                                 <div class="row g-3">
                                     <div class="col-auto">
                                         <div class="d-flex align-items-center gap-2">
-                                            <div class="seat-legend seat-available"></div>
+                                            <span class="d-inline-block rounded bg-success border border-2 border-success" style="width:20px; height:20px;"></span>
                                             <small>Available</small>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="d-flex align-items-center gap-2">
-                                            <div class="seat-legend seat-premium"></div>
+                                            <span class="d-inline-block rounded bg-warning border border-2 border-warning" style="width:20px; height:20px;"></span>
                                             <small>Premium</small>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="d-flex align-items-center gap-2">
-                                            <div class="seat-legend seat-selected"></div>
+                                            <span class="d-inline-block rounded bg-primary border border-2 border-primary" style="width:20px; height:20px;"></span>
                                             <small>Selected</small>
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="d-flex align-items-center gap-2">
-                                            <div class="seat-legend seat-booked"></div>
+                                            <span class="d-inline-block rounded bg-danger border border-2 border-danger" style="width:20px; height:20px;"></span>
                                             <small>Booked</small>
                                         </div>
                                     </div>
@@ -1170,18 +1072,23 @@
             seatGrid.innerHTML = '';
             
             for (let i = 1; i <= totalSeats; i++) {
-                const seat = document.createElement('div');
-                seat.className = 'seat';
+                const seat = document.createElement('button');
+                seat.type = 'button';
                 seat.textContent = i;
                 seat.id = `seat-${i}`;
-                
+                seat.className = 'btn btn-success rounded-3 text-white w-100';
+                seat.style.aspectRatio = '1';
+                seat.style.minWidth = '0';
+                seat.style.padding = '0.5rem';
+
                 if (bookedSeats.includes(i)) {
-                    seat.classList.add('booked');
-                    seat.style.pointerEvents = 'none';
+                    seat.className = 'btn btn-danger rounded-3 text-white w-100';
+                    seat.disabled = true;
                 } else if (premiumSeats.includes(i)) {
-                    seat.classList.add('premium');
+                    seat.className = 'btn btn-warning rounded-3 text-dark w-100';
+                    seat.dataset.premium = 'true';
                 }
-                
+
                 seat.addEventListener('click', toggleSeat);
                 seatGrid.appendChild(seat);
             }
@@ -1192,11 +1099,18 @@
             if (bookedSeats.includes(seatNum)) return;
             
             const seat = event.target;
-            if (seat.classList.contains('selected')) {
-                seat.classList.remove('selected');
+            const isSelected = seat.classList.contains('btn-primary');
+            if (isSelected) {
+                seat.classList.remove('btn-primary', 'text-white');
+                if (seat.dataset.premium === 'true') {
+                    seat.classList.add('btn-warning', 'text-dark');
+                } else {
+                    seat.classList.add('btn-success', 'text-white');
+                }
                 selectedSeats = selectedSeats.filter(s => s !== seatNum);
             } else {
-                seat.classList.add('selected');
+                seat.classList.remove('btn-success', 'btn-warning', 'text-dark');
+                seat.classList.add('btn-primary', 'text-white');
                 selectedSeats.push(seatNum);
             }
             updateBookingPrice();
@@ -1307,9 +1221,9 @@
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
-                backToTop.style.display = 'flex';
+                backToTop.classList.remove('d-none');
             } else {
-                backToTop.style.display = 'none';
+                backToTop.classList.add('d-none');
             }
         });
         backToTop.addEventListener('click', () => {
@@ -1332,7 +1246,7 @@
         </div>
     </section>
 
-    <button id="backToTop" class="btn btn-primary rounded-circle shadow-lg">
+    <button id="backToTop" class="btn btn-primary rounded-circle shadow-lg position-fixed bottom-0 end-0 m-4 d-none">
         <i class="fas fa-chevron-up"></i>
     </button>
 
